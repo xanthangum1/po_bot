@@ -12,7 +12,7 @@ import datetime
 from config import download_file
 import time
 
-def auto_po(username, password, identity):
+def auto_po(username, password, identity, location):
     ### setting up webdriver
     chrome_options = Options()
     chrome_options.add_experimental_option("prefs", {
@@ -27,7 +27,7 @@ def auto_po(username, password, identity):
     driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
     driver.get('https://scs.lgdisplay.com/system/login/retrieveLogin.dev')
     print("entered LG scs")
-    sleep(3)
+    sleep(2)
 
     username_input = driver.find_element_by_xpath("//input[@id='userId']")
     username_input.send_keys(username)
@@ -41,41 +41,78 @@ def auto_po(username, password, identity):
     login_button.click()
     print("logging in")
 
-    sleep(3)
+    sleep(2)
 
-    ###enter overseas tab
-    overseas_path = driver.find_element_by_xpath("//a[@href='#'][normalize-space()='Overseas']")
-    overseas_path.click()
+    ### MFers input names are different for Overseas and Local... LOL. Hence the idiotic elif statement
+    if location == "Overseas":
+        overseas_path = driver.find_element_by_xpath(f"//a[contains(text(),'{location}')]")
+        overseas_path.click()
 
-    sleep(3)
+        sleep(2)
 
-    ###filtering POS for dates
-    today = datetime.datetime.today()
-    days = datetime.timedelta(7)
-    lower = dateme_sama(today-days)
-    print(lower)
-    po_date_lower = driver.find_element_by_xpath("//input[@id='idDateFrom']")
-    # idiotic fix for date being entered twice...
-    for _ in range(8):
-        po_date_lower.send_keys(Keys.BACKSPACE)
-    po_date_lower.send_keys(lower)
+        ###filtering POS for dates
+        today = datetime.datetime.today()
+        days = datetime.timedelta(7)
+        lower = dateme_sama(today-days)
+        print(lower)
+        po_date_lower = driver.find_element_by_xpath("//input[@id='idDateFrom']")
+        # idiotic fix for date being entered twice...
+        for _ in range(8):
+            po_date_lower.send_keys(Keys.BACKSPACE)
+        po_date_lower.send_keys(lower)
 
-    po_date_upper = driver.find_element_by_xpath("//input[@id='idDateTo']")
-    sleep(1)
-    # idiotic fix for date being entered twice...
-    po_date_upper.send_keys(dateme_sama(today))
-    for _ in range(8):
-        po_date_upper.send_keys(Keys.BACKSPACE)
-    sleep(5)
-    ### search
-    login_button = driver.find_element_by_css_selector("button[name='btnInquiry']")
-    login_button.click()
-    sleep(5)
+        po_date_upper = driver.find_element_by_xpath("//input[@id='idDateTo']")
+        sleep(1)
+        # idiotic fix for date being entered twice...
+        po_date_upper.send_keys(dateme_sama(today))
+        for _ in range(8):
+            po_date_upper.send_keys(Keys.BACKSPACE)
+        sleep(1)
+        ### search
+        login_button = driver.find_element_by_css_selector("button[name='btnInquiry']")
+        login_button.click()
+        sleep(5)
 
-    ### download excel
-    login_button = driver.find_element_by_xpath("//button[@id='btnExcel']")
-    login_button.click()
-    sleep(5)
+        ### download excel
+        login_button = driver.find_element_by_xpath("//button[@id='btnExcel']")
+        login_button.click()
+        sleep(5)
 
-    latest_download_file(identity)
+        latest_download_file(identity)
 
+    elif location == "Local":
+        local_path = driver.find_element_by_xpath(f"//a[contains(text(),'{location}')]")
+        local_path.click()
+
+
+        sleep(2)
+
+        ###filtering POS for dates
+        today = datetime.datetime.today()
+        days = datetime.timedelta(7)
+        lower = dateme_sama(today-days)
+        print(lower)
+        po_date_lower = driver.find_element_by_xpath("//div[@id='rangeDate']//input[@id='dateFrom']")
+        # idiotic fix for date being entered twice...
+        for _ in range(8):
+            po_date_lower.send_keys(Keys.BACKSPACE)
+        po_date_lower.send_keys(lower)
+
+        po_date_upper = driver.find_element_by_xpath("//div[@id='rangeDate']//input[@id='dateTo']")
+        sleep(1)
+        # idiotic fix for date being entered twice...
+        po_date_upper.send_keys(dateme_sama(today))
+        for _ in range(8):
+            po_date_upper.send_keys(Keys.BACKSPACE)
+        sleep(1)
+        ### search
+        login_button = driver.find_element_by_css_selector("button[name='btnInquiry']")
+        login_button.click()
+        sleep(5)
+
+        ### download excel
+        login_button = driver.find_element_by_xpath("//button[@id='btnExcel']")
+        login_button.click()
+        sleep(5)
+
+        latest_download_file(identity)
