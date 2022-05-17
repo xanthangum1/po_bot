@@ -16,7 +16,5 @@ def michael_schumacher():
     retriever_art()
     for client in overseas_client_list:
         auto_po(client["id"], client["pw"], client["identity"], client["location"])
-    # auto_po(overseas_client_dict["lgd_yeontai"]["id"], overseas_client_dict["lgd_yeontai"]["pw"], overseas_client_dict["lgd_yeontai"]["identity"])
-    # auto_po(overseas_client_dict["lgd_vh"]["id"], overseas_client_dict["lgd_vh"]["pw"], overseas_client_dict["lgd_vh"]["identity"])
 
 michael_schumacher()
