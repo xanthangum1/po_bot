@@ -21,6 +21,7 @@ def auto_po(username, password, identity, location):
         "download.directory_upgrade": True,
         "safebrowsing.enabled": True
         })
+        
     os.environ['WDM_SSL_VERIFY']='0'
     print("starting PO retriever")
     ###logging into LG SCS
@@ -52,8 +53,7 @@ def auto_po(username, password, identity, location):
 
         ###filtering POS for dates
         today = datetime.datetime.today()
-        days = datetime.timedelta(7)
-        lower = dateme_sama(today-days)
+        lower = dateme_sama(today)
         print(lower)
         po_date_lower = driver.find_element_by_xpath("//input[@id='idDateFrom']")
         # idiotic fix for date being entered twice...
