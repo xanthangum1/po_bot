@@ -45,7 +45,7 @@ def auto_po(username, password, identity, location):
 
     ### MFers input names are different for Overseas and Local... LOL. Hence the idiotic elif statement
     if location == "Overseas":
-        overseas_path = driver.find_element_by_xpath(f"//a[contains(text(),'{location}')]")
+        overseas_path = driver.find_element_by_xpath("//a[@href='#'][normalize-space()='Overseas']")
         overseas_path.click()
 
         sleep(2)
