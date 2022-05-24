@@ -89,8 +89,7 @@ def auto_po(username, password, identity, location):
 
         ###filtering POS for dates
         today = datetime.datetime.today()
-        days = datetime.timedelta(2)
-        lower = dateme_sama(today-days)
+        lower = dateme_sama(today)
         print(lower)
         po_date_lower = driver.find_element_by_xpath("//div[@id='rangeDate']//input[@id='dateFrom']")
         # idiotic fix for date being entered twice...
