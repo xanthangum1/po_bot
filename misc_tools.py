@@ -10,7 +10,7 @@ def dateme_sama(today):
         today_str = str(lower)
         tod_num = today_str[0] + today_str[1] + today_str[2] + today_str[3] + today_str[5] + today_str[6] + today_str[8] + today_str[9]
     else:
-        days = dt.timedelta(3)
+        days = dt.timedelta(1)
         today_str = str(today-days)
         tod_num = today_str[0] + today_str[1] + today_str[2] + today_str[3] + today_str[5] + today_str[6] + today_str[8] + today_str[9]
     return tod_num

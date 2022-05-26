@@ -21,7 +21,6 @@ def auto_po(username, password, identity, location):
         "download.directory_upgrade": True,
         "safebrowsing.enabled": True
         })
-        
     os.environ['WDM_SSL_VERIFY']='0'
     print("starting PO retriever")
     ###logging into LG SCS
