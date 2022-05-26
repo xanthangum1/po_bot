@@ -6,7 +6,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from config import yt_id, yt_pw, vh_id, vh_pw
-from misc_tools import dateme_sama, latest_download_file
+from misc_tools import dateme_sama, latest_download_file, day_to_string
 import os
 import datetime
 from config import download_file
@@ -64,7 +64,7 @@ def auto_po(username, password, identity, location):
         po_date_upper = driver.find_element_by_xpath("//input[@id='idDateTo']")
         sleep(1)
         # idiotic fix for date being entered twice...
-        po_date_upper.send_keys(dateme_sama(today))
+        po_date_upper.send_keys(day_to_string(today))
         for _ in range(8):
             po_date_upper.send_keys(Keys.BACKSPACE)
         sleep(1)
@@ -100,7 +100,7 @@ def auto_po(username, password, identity, location):
         po_date_upper = driver.find_element_by_xpath("//div[@id='rangeDate']//input[@id='dateTo']")
         sleep(1)
         # idiotic fix for date being entered twice...
-        po_date_upper.send_keys(dateme_sama(today))
+        po_date_upper.send_keys(day_to_string(today))
         for _ in range(8):
             po_date_upper.send_keys(Keys.BACKSPACE)
         sleep(1)
