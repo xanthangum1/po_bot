@@ -5,9 +5,9 @@ from retriever import retriever_art
 
 ### Make sure location is capitalized. I know its lazy
 overseas_client_list = [
-    {"id": yt_id, "pw": yt_pw, "identity": "yt", "location": "Overseas"}, 
+    {"id": yt_id, "pw": yt_pw, "identity": "yt", "location": "Overseas"},
     {"id": vh_id, "pw": vh_pw, "identity": "vn", "location": "Overseas"},
-    {"id": lc_id, "pw": lc_pw, "identity": "dev", "location": "Local"}
+    {"id": lc_id, "pw": lc_pw, "identity": "dev", "location": "Local"},
 ]
 
 
@@ -16,5 +16,6 @@ def michael_schumacher():
     retriever_art()
     for client in overseas_client_list:
         auto_po(client["id"], client["pw"], client["identity"], client["location"])
+
 
 michael_schumacher()
