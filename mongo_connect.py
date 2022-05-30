@@ -1,15 +1,17 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, DESCENDING
 from config import mongo_pass
+import certifi
 
 client = MongoClient(
-    f"mongodb+srv://adriankim18:<{mongo_pass}>@lxs-iot.htx5e.mongodb.net/?retryWrites=true&w=majority"
-)
+    f"mongodb+srv://lxs-adrian:{mongo_pass}@lxs-iot.htx5e.mongodb.net/?retryWrites=true&w=majority&tlsInsecure=true",
+    )
+
 
 db = client["LXS-IOT"]
 
 mycol = db["po"]
 
-{
+first_po= {
     "EM05D000119": {
         "No.": "2",
         "P/O No": "EM05D000119",
@@ -51,3 +53,12 @@ mycol = db["po"]
         "PO Source": "MPI_PO",
     }
 }
+
+mydict = mycol.insert_one(first_po)
+
+db.createIndex()
+
+# db["po"].create_index(
+#     [("P/O No", DESCENDING)], 
+#     unique=True
+# )
