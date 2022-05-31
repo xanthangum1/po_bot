@@ -1,6 +1,15 @@
-from po_crawl import auto_po
 from config import yt_id, yt_pw, vh_id, vh_pw, lc_id, lc_pw
+from po_crawl import auto_po
 from retriever import retriever_art
+import sentry_sdk
+
+sentry_sdk.init(
+    "https://5271eee5bbe24a4483ec62717d7cdf21@o1268698.ingest.sentry.io/6456488",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+)
 
 
 ### Make sure location is capitalized. I know its lazy

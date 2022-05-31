@@ -59,3 +59,9 @@ def latest_download_file(client_name):
     # go back to executable script file
     os.chdir(script_file)
     return None
+
+def dict_key_space_destroyer(unsuspecting_list):
+    for unsuspecting_dict in unsuspecting_list:
+        unsuspecting_dict = {x.replace(' ', ''): v 
+        for x, v in unsuspecting_dict.items()}
+    return unsuspecting_list

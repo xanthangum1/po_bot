@@ -11,6 +11,7 @@ import os
 import datetime
 from config import download_file
 import time
+from po_organizer import excel_to_json_reader_and_saver
 
 
 def auto_po(username, password, identity, location):
@@ -86,6 +87,7 @@ def auto_po(username, password, identity, location):
         sleep(5)
 
         latest_download_file(identity)
+        excel_to_json_reader_and_saver(identity)
 
     elif location == "Local":
         local_path = driver.find_element_by_xpath(f"//a[contains(text(),'{location}')]")
@@ -125,3 +127,4 @@ def auto_po(username, password, identity, location):
         sleep(5)
 
         latest_download_file(identity)
+        excel_to_json_reader_and_saver(identity)
