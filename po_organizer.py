@@ -10,6 +10,7 @@ from mongo_connect import db
 from pymongo.errors import BulkWriteError
 from db_logic import bulk_upserts_en, bulk_upserts_kr
 from misc_tools import dict_key_space_destroyer
+from mongo_connect import devpo, mppo
 
 
 def excel_to_json_reader_and_saver(identity):
@@ -29,9 +30,9 @@ def excel_to_json_reader_and_saver(identity):
         try:
             if identity == "local":
                 data = dict_key_space_destroyer(data)
-                bulk_upserts_kr(data, db)
+                bulk_upserts_kr(data, devpo)
             elif identity == "yt" or identity == "vn":    
-                bulk_upserts_en(data, db)
+                bulk_upserts_en(data, mppo)
         except BulkWriteError:
             pass
 

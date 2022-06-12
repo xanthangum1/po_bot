@@ -9,8 +9,10 @@ client = MongoClient(
 
 db = client["LXS-IOT"]
 
-# mpcol = db["mp_po"]
-# devpo = db["dev_po"]
+# mycol = db[""]
+
+mppo = db["mp_po"]
+devpo = db["dev_po"]
 
 # first_po= {
 #     "No.": "2",
